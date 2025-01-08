@@ -21,7 +21,6 @@ func connectDB() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	// Verifica se a conexão foi estabelecida com sucesso
 	if err := client.Ping(ctx, nil); err != nil {
 		log.Fatal(err)
 	}
