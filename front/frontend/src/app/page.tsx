@@ -1,5 +1,10 @@
-import Image from "next/image";
 
 export default function Home() {
-  return <h1>Hello Word!</h1>;
+  return (
+    <nav>
+      <h1>Home</h1>
+      <p>Conteúdo da página inicial</p>
+      <h2>Seção 01 </h2>
+    </nav>
+  );
 }
