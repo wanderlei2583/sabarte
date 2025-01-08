@@ -1,40 +1,24 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+"use client";
+
+import { usePathname } from "next/navigation"; // Para detectar a página atual
 import ArtisticMouse from "./components/artisticmouse";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isHome = pathname === "/"; // Verifica se está na página inicial
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Seba Arte",
-  description: "Painel virtual do Artista Seba",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
   return (
     <html lang="br">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          cursor: isHome ? "url('/cursor-pincel.png'), auto" : "default", // Caminho direto e consistente
+        }}
       >
-        {/* Mouse-Pincel Artistico */}
-        <ArtisticMouse />
-        {/* Conteúdo Principal */}
-        <div style={{ position: "relative", zIndex: 1 }}>
-          {children}
-        </div>
+        {isHome && <ArtisticMouse />} {/* Apenas na Home */}
+        <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
       </body>
     </html>
   );
 }
+
